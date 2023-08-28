@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotherOfLearningGameWeb", "MotherOfLearningGameWeb\MotherOfLearningGameWeb.csproj", "{60F0420F-3B32-4285-9952-6661142FE7AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{FD157652-4C93-489B-B3AE-F5424BBE947A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grains", "Grains\Grains.csproj", "{2D5D370E-3721-4BAE-A1E6-2235EF877581}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60F0420F-3B32-4285-9952-6661142FE7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F0420F-3B32-4285-9952-6661142FE7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F0420F-3B32-4285-9952-6661142FE7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F0420F-3B32-4285-9952-6661142FE7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD157652-4C93-489B-B3AE-F5424BBE947A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD157652-4C93-489B-B3AE-F5424BBE947A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD157652-4C93-489B-B3AE-F5424BBE947A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD157652-4C93-489B-B3AE-F5424BBE947A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D5D370E-3721-4BAE-A1E6-2235EF877581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D5D370E-3721-4BAE-A1E6-2235EF877581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D5D370E-3721-4BAE-A1E6-2235EF877581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D5D370E-3721-4BAE-A1E6-2235EF877581}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
