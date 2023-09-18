@@ -1,7 +1,9 @@
 ﻿using Domain.User;
+using Orleans.Providers;
 
-namespace Grains;
+namespace Grains.User;
 
+[StorageProvider]
 public class UserGrain: Grain<UserState>, IUserGrain
 {
     public Task<bool> CheckCredentials(string pass)

@@ -7,14 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Character\" />
       <Folder Include="Player\" />
       <Folder Include="Skills\" />
+      <Folder Include="UserCharacter\" />
     </ItemGroup>
 
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Orleans.Sdk" Version="7.2.1" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dto\Dto.csproj" />
     </ItemGroup>
 
 </Project>

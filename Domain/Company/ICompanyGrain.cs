@@ -1,6 +1,9 @@
-﻿namespace Domain.Company;
+﻿using Dto.Company;
+
+namespace Domain.Company;
 
 public interface ICompanyGrain : IGrainWithStringKey
 {
-    Task ShowLog();
+    Task<CompanyDto> GetCompany();
+    Task Save();
 }

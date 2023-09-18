@@ -1,4 +1,4 @@
-﻿namespace Grains;
+﻿namespace Grains.User;
 
 public class UserState
 {

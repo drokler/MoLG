@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using MotherOfLearningGameWeb;
 using Newtonsoft.Json;
 using Orleans.Providers.MongoDB.Configuration;
+using Orleans.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseOrleans(siloBuilder =>
@@ -10,6 +11,11 @@ builder.Host.UseOrleans(siloBuilder =>
     siloBuilder.UseLocalhostClustering();
     siloBuilder.UseMongoDBClient("mongodb://localhost");
     siloBuilder.AddMongoDBGrainStorageAsDefault(storageOptions => { storageOptions.DatabaseName = "MotherOfLearn"; });
+    siloBuilder.Services.AddSerializer(serializerBuilder =>
+    {
+        serializerBuilder.AddNewtonsoftJsonSerializer(
+            isSupported: type => type.Namespace!.StartsWith("Dto"));
+    });
 });
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAll", corsBuilder =>
