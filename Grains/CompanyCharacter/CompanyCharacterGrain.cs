@@ -15,4 +15,9 @@ public class CompanyCharacterGrain: Grain<CompanyCharacterState>, ICompanyCharac
             await WriteStateAsync();
         }
     }
+
+    public Task<List<string>> GetCharacterList()
+    {
+        return Task.FromResult(State.Characters);
+    }
 }

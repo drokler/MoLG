@@ -8,4 +8,5 @@ public interface ICompanyAggregateGrain: IGrainWithIntegerKey
     Task<List<CompanyDto>> GetCompanies();
     Task<CompanyDto> NewCompany();
     Task AddCharacter(CompanyCharacterAddDto dto);
+    Task<CompanyDto> Update(CompanyUpdateDto dto);
 }

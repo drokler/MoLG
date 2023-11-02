@@ -1,7 +1,5 @@
-﻿using System.Runtime.Intrinsics.Arm;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Text.Unicode;
 using Domain.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,19 +22,39 @@ public class AuthController : Controller
         _factory = factory;
         _key = configuration.GetValue<string>("JwtKey")!;
     }
+
+    
+    [HttpPost("setup-admin")]
+    public async Task<AuthResult> SetupAdmin([FromBody] AuthDto authDto)
+    {
+        var aggregate = _factory.GetGrain<IUserAggregateGrain>(0);
+        if (await aggregate.IsSetUp())
+        {
+            throw new InvalidOperationException("Admin has already set up");
+        }
+        var admin = await aggregate.CreateAdmin(authDto.Login, GetSha(authDto.Password, _key));
+        return new AuthResult { Token = JwtTokenValidator.GetToken(_key, authDto.Login, admin.Roles) };
+    }
     
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] AuthDto authDto)
+    public async Task<AuthResult> Post([FromBody] AuthDto authDto)
     {
         var user = _factory.GetGrain<IUserGrain>(authDto.Login);
-        var isValidCredential = await user.CheckCredentials( GetSha(authDto.Password, _key));
+        var isValidCredential = await user.CheckCredentials(GetSha(authDto.Password, _key));
         if (isValidCredential)
         {
             var roles = await user.GetRoles();
-            return Json(JwtTokenValidator.GetToken(_key, authDto.Login, roles));
+            return new AuthResult { Token = JwtTokenValidator.GetToken(_key, authDto.Login, roles) };
         }
 
-        return Unauthorized();
+        return new AuthResult();
+    }
+    
+    [HttpPut]
+    public async Task<AuthResult> Register([FromBody] AuthDto dto)
+    {
+        var user = await _factory.GetGrain<IUserAggregateGrain>(0).CreateUser(dto.Login, GetSha(dto.Password, _key));
+        return new AuthResult { Token = JwtTokenValidator.GetToken(_key, dto.Login, user.Roles) };
     }
 
     private static string GetSha(string password, string key)
@@ -45,5 +63,4 @@ public class AuthController : Controller
         var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(key + password));
         return Convert.ToBase64String(bytes);
     }
-
 }

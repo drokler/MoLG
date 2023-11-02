@@ -42,6 +42,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Administrator", policy => policy.RequireRole("admin"));
+    options.AddPolicy("User", policy => policy.RequireRole("user"));
 });
 
 builder.Services.Configure<JsonGrainStateSerializerOptions>(options =>

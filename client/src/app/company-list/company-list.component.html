@@ -1,0 +1,18 @@
+<div class="admin-button-container">
+  <button mat-raised-button (click)="newCompany()" class="admin-button">
+    Создать
+  </button>
+</div>
+
+
+<mat-accordion multi>
+  <mat-expansion-panel *ngFor="let company of companies" class="list">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{company.name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    Type your name and age
+    <mat-icon>account_circle</mat-icon>
+  </mat-expansion-panel>
+</mat-accordion>

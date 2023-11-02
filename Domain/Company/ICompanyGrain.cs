@@ -4,6 +4,7 @@ namespace Domain.Company;
 
 public interface ICompanyGrain : IGrainWithStringKey
 {
-    Task<CompanyDto> GetCompany();
+    Task<CompanyDto> GetDto();
     Task Save();
+    Task Update(CompanyUpdateDto dto);
 }

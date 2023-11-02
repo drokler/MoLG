@@ -25,11 +25,7 @@ public class UserController : Controller
         return await _factory.GetGrain<IUserAggregateGrain>(0).GetUsers();
     }
 
-    [HttpPut]
-    public async Task<UserDto> CreateUser()
-    {
-        return await _factory.GetGrain<IUserAggregateGrain>(0).CreateUser();
-    }
+    
 
     
     

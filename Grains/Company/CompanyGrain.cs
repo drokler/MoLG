@@ -14,7 +14,7 @@ public class CompanyGrain : Grain<CompanyState>, ICompanyGrain
         return Task.CompletedTask;
     }
 
-    public Task<CompanyDto> GetCompany()
+    public Task<CompanyDto> GetDto()
     {
         return Task.FromResult(new CompanyDto()
         {
@@ -25,6 +25,12 @@ public class CompanyGrain : Grain<CompanyState>, ICompanyGrain
 
     public async Task Save()
     {
+        await WriteStateAsync();
+    }
+
+    public async Task Update(CompanyUpdateDto dto)
+    {
+        State.Name = dto.Name;
         await WriteStateAsync();
     }
 }

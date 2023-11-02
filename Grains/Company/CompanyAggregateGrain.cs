@@ -11,14 +11,10 @@ public class CompanyAggregateGrain: Grain<CompanyAggregateState>, ICompanyAggreg
 {
     public async Task<List<CompanyDto>> GetCompanies()
     {
-        var ret = new List<CompanyDto>();
-
-        foreach (var id in State.Ids)
-        {
-            ret.Add(await GrainFactory.GetGrain<ICompanyGrain>(id).GetCompany());
-        }
+        var tasks = State.Ids.Select(async id => await GrainFactory.GetGrain<ICompanyGrain>(id).GetDto()).ToList();
+        await Task.WhenAll(tasks);
         
-        return ret;
+        return tasks.Select(t => t.Result).ToList();
     }
 
     public async Task<CompanyDto> NewCompany()
@@ -28,11 +24,18 @@ public class CompanyAggregateGrain: Grain<CompanyAggregateState>, ICompanyAggreg
         await WriteStateAsync();
         var company = GrainFactory.GetGrain<ICompanyGrain>(id);
         await company.Save();
-        return await company.GetCompany();
+        return await company.GetDto();
     }
 
     public async Task AddCharacter(CompanyCharacterAddDto dto)
     {
         await GrainFactory.GetGrain<ICompanyCharacterGrain>(dto.CompanyId).AddCharacter(dto.CharacterId);
+    }
+
+    public async Task<CompanyDto> Update(CompanyUpdateDto dto)
+    {
+        var company = GrainFactory.GetGrain<ICompanyGrain>(dto.Id);
+        await company.Update(dto);
+        return await company.GetDto();
     }
 }

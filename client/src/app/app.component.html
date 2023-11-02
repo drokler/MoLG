@@ -1,0 +1,22 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Мать учения</span>
+  <span class="spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mgl-map
+[style]="'https://demotiles.maplibre.org/style.json'"
+[zoom]="[9]"
+[center]="[-74.5, 40]"
+>
+</mgl-map>
+
+<router-outlet></router-outlet>
