@@ -1,0 +1,18 @@
+<div class="page-container">
+  <mgl-map #map [style]="style" [zoom]="zoom" [center]="[-74.5, 40]" (zoomEnd)="onZoomEnd($event)">
+  </mgl-map>
+  <div class="selector-part">
+    <mat-form-field>
+      <mat-label>Редактировние данных</mat-label>
+      <mat-select [(ngModel)]="selectedEditor" name="opt">
+        <mat-option *ngFor="let editor of editors" [value]="editor.value">
+          {{editor.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="editor-container">
+      <app-location-list *ngIf="selectedEditor=='locations'"></app-location-list>
+    </div>
+  </div>
+</div>
